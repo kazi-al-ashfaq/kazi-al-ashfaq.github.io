@@ -1,36 +1,102 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Kazi Al Ashfaq — Personal Portfolio
+
+A modern, accessible, and interactive personal portfolio built with Next.js, Tailwind CSS, Framer Motion, and EmailJS. This site showcases my experience, skills, and passion for cybersecurity and education.
+
+## Features
+
+- **Terminal-Style Preloader:** Professional typewriter effect with branding, accessible and responsive, appears on every page load.
+- **Interactive Terminal Puzzle Game:** Try terminal commands to discover my background, skills, and download my resume.
+- **Personalized Sections:**
+  - Hero (with professional title and tagline)
+  - About Me
+  - Experience
+  - Skills & Expertise
+  - Contact (secure, accessible form)
+- **Dark Mode Toggle:** Seamless light/dark theme switching.
+- **SVG Icons & Custom Graphics:** Clean, modern visuals.
+- **SEO & Open Graph:** Optimized meta tags, favicon, and OG image for sharing and discoverability.
+- **Accessibility:** Keyboard navigation, ARIA labels, color contrast, and screen reader support.
+- **Security:** All user input sanitized and validated, no sensitive data exposed, secure external links.
+- **Ready for Vercel Deployment:** Fully static, optimized, and production-ready.
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js (v18+ recommended)
+- npm or yarn
+
+### Installation
+
+```bash
+npm install
+# or
+yarn install
+```
+
+### Development
 
 ```bash
 npm run dev
 # or
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Visit [http://localhost:3000](http://localhost:3000) to view the site locally.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Build for Production
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+npm run start
+# or
+yarn build
+yarn start
+```
 
-## Learn More
+### Linting
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm run lint
+# or
+yarn lint
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Project Structure
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```text
+├── public/                # Static assets (favicon, etc.)
+├── src/
+│   ├── app/               # Next.js app directory
+│   │   ├── layout.tsx     # Global layout (preloader, meta, nav)
+│   │   ├── page.tsx       # Main page (all sections)
+│   │   └── globals.css    # Global styles (Tailwind)
+│   └── components/        # All React components
+│       ├── Preloader.tsx  # Terminal-style preloader
+│       ├── TerminalGame.tsx # Interactive terminal puzzle
+│       ├── Hero.tsx, AboutMe.tsx, ...
+├── tailwind.config.js     # Tailwind CSS config
+├── next.config.ts         # Next.js config
+├── tsconfig.json          # TypeScript config
+└── README.md              # Project documentation
+```
 
-## Deploy on Vercel
+## Usage
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **Terminal Preloader:** Displays on every page load, then fades to reveal the site.
+- **Terminal Game:** Type `help` to see available commands. Try `whoami`, `show skills`, `unlock experience`, `ping goals`, `sudo hire kazi`, and more.
+- **Contact Form:** Secure, accessible, and connected to EmailJS for direct messages.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Customization
+
+- Update content in the respective components in `src/components/`.
+- Adjust theme colors in `tailwind.config.js`.
+- Update SEO/meta in `src/app/layout.tsx`.
+
+## License
+
+This project is open source and available under the [MIT License](LICENSE).
+
+---
+
+**Kazi Al Ashfaq** — Cybersecurity Enthusiast & Educator

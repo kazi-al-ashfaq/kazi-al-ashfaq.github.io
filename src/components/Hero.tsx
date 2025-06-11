@@ -40,7 +40,9 @@ export default function Hero() {
       aria-labelledby="hero-heading"
     >
       <div className="w-full max-w-2xl flex flex-col items-center">
-        <h1 id="hero-heading" className="text-3xl sm:text-4xl font-bold text-dgrees-text text-center leading-tight">Kazi Al Ashfaq</h1>
+        <h1 id="hero-heading" className="text-3xl sm:text-4xl font-bold text-dgrees-text text-center leading-tight">
+          Kazi Al Ashfaq <span className="block text-lg font-medium text-dgrees-secondary mt-1">Cybersecurity Enthusiast & Educator</span>
+        </h1>
         <p className="mt-1 text-lg text-dgrees-muted min-h-[2.2rem] flex items-center justify-center w-full max-w-full overflow-hidden">
           <AnimatePresence mode="wait">
             <motion.span

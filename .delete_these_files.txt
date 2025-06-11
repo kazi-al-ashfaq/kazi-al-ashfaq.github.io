@@ -1,0 +1,6 @@
+public/preloader.html
+public/vercel.svg
+public/next.svg
+public/globe.svg
+public/file.svg
+public/window.svg

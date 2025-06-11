@@ -28,6 +28,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <title>Kazi Al Ashfaq | Cybersecurity Enthusiast & Educator</title>
+        <meta name="description" content="Kazi Al Ashfaq — Cybersecurity Enthusiast & Educator. Explore my portfolio, experience, skills, and projects in cybersecurity and IT education." />
+        <meta property="og:title" content="Kazi Al Ashfaq | Cybersecurity Enthusiast & Educator" />
+        <meta property="og:description" content="Kazi Al Ashfaq — Cybersecurity Enthusiast & Educator. Explore my portfolio, experience, skills, and projects in cybersecurity and IT education." />
+        {/* ...existing meta, favicon, and SEO tags... */}
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-dgrees-bg text-dgrees-text`}
       >

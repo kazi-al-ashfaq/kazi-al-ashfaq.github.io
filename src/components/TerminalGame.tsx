@@ -102,7 +102,7 @@ export default function TerminalGame() {
   return (
     <section id="cyber-game" className="w-full max-w-2xl mx-auto my-12 py-8 px-4 rounded-xl shadow-lg bg-[#1B1F27] text-[#00C0E0] font-mono">
       <h2 className="text-2xl md:text-3xl font-bold mb-4 flex items-center gap-2 select-none">
-        <span role="img" aria-label="satellite">📡</span> Hack This Terminal to Learn About Me
+        Hack This Terminal to Learn About Me
       </h2>
       <div
         ref={logRef}
