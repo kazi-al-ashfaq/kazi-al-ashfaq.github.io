@@ -7,69 +7,112 @@ export default function Contact() {
   const form = useRef<HTMLFormElement>(null);
   const [sent, setSent] = useState(false);
   const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  const sendEmail = (e: React.FormEvent) => {
+  // Simple sanitization for user input
+  function sanitize(input: string) {
+    return input.replace(/[<>]/g, "");
+  }
+
+  const sendEmail = async (e: React.FormEvent) => {
     e.preventDefault();
     setSent(false);
     setError(false);
+    setLoading(true);
     if (!form.current) return;
-    emailjs
-      .sendForm(
-        "your_service_id",
-        "your_template_id",
-        form.current,
-        "your_user_id"
-      )
-      .then(
-        () => setSent(true),
-        () => setError(true)
+    const formData = new FormData(form.current);
+    const name = sanitize(formData.get("user_name") as string);
+    const email = sanitize(formData.get("user_email") as string);
+    const message = sanitize(formData.get("message") as string);
+    if (!name || !email || !message) {
+      setError(true);
+      setLoading(false);
+      return;
+    }
+    try {
+      await emailjs.send(
+        "service_2hkm9lu",
+        "template_d7whynt",
+        {
+          user_name: name,
+          user_email: email,
+          message: message,
+        },
+        "4JfsUnAYT4AWKlLdn"
       );
+      setSent(true);
+    } catch {
+      setError(true);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
-    <section id="contact" className="w-full max-w-2xl mx-auto py-12 bg-dgrees-bg text-dgrees-text dark:bg-white dark:text-black rounded-xl shadow-lg">
-      <h2 className="text-3xl font-bold mb-4 text-dgrees-secondary dark:text-dgrees-primary">Contact</h2>
+    <section
+      id="contact"
+      className="w-full max-w-2xl mx-auto py-10 px-4 bg-dgrees-bg text-dgrees-text rounded-xl shadow-lg"
+      aria-labelledby="contact-heading"
+    >
+      <h2 className="text-3xl md:text-4xl font-extrabold mb-6 text-dgrees-secondary tracking-tight text-center">Contact</h2>
       <form
         ref={form}
         onSubmit={sendEmail}
-        className="flex flex-col gap-4 bg-dgrees-bg p-6 rounded-lg shadow dark:bg-white"
+        className="flex flex-col gap-4 bg-dgrees-bg p-6 rounded-xl shadow-md border border-dgrees-muted/20"
+        aria-label="Contact form"
+        autoComplete="off"
       >
+        <label htmlFor="user_name" className="sr-only">Name</label>
         <input
+          id="user_name"
           type="text"
           name="user_name"
           placeholder="Your Name"
           required
-          className="p-2 rounded border border-dgrees-muted bg-dgrees-bg text-dgrees-text placeholder-dgrees-muted focus:border-dgrees-primary focus:ring-2 focus:ring-dgrees-secondary dark:bg-white dark:text-black dark:placeholder-dgrees-muted dark:border-dgrees-muted"
+          minLength={2}
+          maxLength={50}
+          className="p-3 rounded-lg border border-dgrees-muted bg-dgrees-bg text-dgrees-text placeholder-dgrees-muted focus:border-dgrees-primary focus:ring-2 focus:ring-dgrees-secondary outline-none transition text-base md:text-lg"
         />
+        <label htmlFor="user_email" className="sr-only">Email</label>
         <input
+          id="user_email"
           type="email"
           name="user_email"
           placeholder="Your Email"
           required
-          className="p-2 rounded border border-dgrees-muted bg-dgrees-bg text-dgrees-text placeholder-dgrees-muted focus:border-dgrees-primary focus:ring-2 focus:ring-dgrees-secondary dark:bg-white dark:text-black dark:placeholder-dgrees-muted dark:border-dgrees-muted"
+          minLength={5}
+          maxLength={100}
+          pattern="^[^@\s]+@[^@\s]+\.[^@\s]+$"
+          className="p-3 rounded-lg border border-dgrees-muted bg-dgrees-bg text-dgrees-text placeholder-dgrees-muted focus:border-dgrees-primary focus:ring-2 focus:ring-dgrees-secondary outline-none transition text-base md:text-lg"
         />
+        <label htmlFor="message" className="sr-only">Message</label>
         <textarea
+          id="message"
           name="message"
           placeholder="Your Message"
           required
-          className="p-2 rounded border border-dgrees-muted bg-dgrees-bg text-dgrees-text placeholder-dgrees-muted focus:border-dgrees-primary focus:ring-2 focus:ring-dgrees-secondary dark:bg-white dark:text-black dark:placeholder-dgrees-muted dark:border-dgrees-muted"
+          minLength={5}
+          maxLength={1000}
+          rows={5}
+          className="p-3 rounded-lg border border-dgrees-muted bg-dgrees-bg text-dgrees-text placeholder-dgrees-muted focus:border-dgrees-primary focus:ring-2 focus:ring-dgrees-secondary outline-none transition resize-none text-base md:text-lg"
         />
         <button
           type="submit"
-          className="bg-dgrees-primary text-dgrees-bg font-semibold py-2 px-4 rounded hover:bg-dgrees-secondary hover:text-dgrees-text transition dark:bg-dgrees-secondary dark:text-black dark:hover:bg-dgrees-primary dark:hover:text-white"
+          disabled={loading}
+          className="bg-dgrees-primary text-dgrees-bg font-semibold py-3 px-6 rounded-lg hover:bg-dgrees-secondary hover:text-dgrees-text focus:ring-2 focus:ring-dgrees-secondary focus:outline-none transition text-lg shadow-md disabled:opacity-60 disabled:cursor-not-allowed"
         >
-          Send Message
+          {loading ? "Sending..." : "Send Message"}
         </button>
-        {sent && <p className="text-green-600 dark:text-green-700">Message sent successfully!</p>}
-        {error && <p className="text-red-600 dark:text-red-700">Failed to send message. Please try again.</p>}
+        {sent && <p className="text-green-500 font-medium text-center">Message sent successfully!</p>}
+        {error && <p className="text-red-500 font-medium text-center">Failed to send message. Please try again.</p>}
       </form>
-      <div className="flex gap-6 mt-6 justify-center">
+      <div className="flex gap-8 mt-8 justify-center items-center">
         <a
           href="https://linkedin.com/in/your-linkedin"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="LinkedIn"
-          className="text-2xl text-dgrees-secondary hover:text-dgrees-primary transition dark:text-dgrees-primary dark:hover:text-dgrees-secondary"
+          className="text-3xl text-dgrees-secondary hover:text-dgrees-primary transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-dgrees-secondary rounded-full"
         >
           <FaLinkedin />
         </a>
@@ -78,12 +121,12 @@ export default function Contact() {
           target="_blank"
           rel="noopener noreferrer"
           aria-label="GitHub"
-          className="text-2xl text-dgrees-muted hover:text-dgrees-primary transition dark:text-black dark:hover:text-dgrees-secondary"
+          className="text-3xl text-dgrees-muted hover:text-dgrees-primary transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-dgrees-secondary rounded-full"
         >
           <FaGithub />
         </a>
       </div>
-      <footer className="mt-8 text-center text-xs text-dgrees-muted dark:text-black">
+      <footer className="mt-10 text-center text-xs text-dgrees-muted tracking-wide select-none">
         &copy; {new Date().getFullYear()} Kazi Al Ashfaq
       </footer>
     </section>

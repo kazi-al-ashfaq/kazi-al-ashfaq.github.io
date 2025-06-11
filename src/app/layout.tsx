@@ -4,7 +4,6 @@ import "./globals.css";
 import MainNav from "@/components/MainNav";
 import CopyrightBadge from "@/components/CopyrightBadge";
 import Preloader from "@/components/Preloader";
-import DarkModeToggle from "@/components/DarkModeToggle";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,12 +27,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-dgrees-bg text-dgrees-text`}
       >
         <Preloader />
-        <DarkModeToggle />
         <MainNav />
         {children}
         <CopyrightBadge />

@@ -3,6 +3,7 @@ import AboutMe from "@/components/AboutMe";
 import Experience from "@/components/Experience";
 import SkillsExpertise from "@/components/SkillsExpertise";
 import Contact from "@/components/Contact";
+import TerminalGame from "@/components/TerminalGame";
 
 export default function Home() {
   return (
@@ -12,6 +13,7 @@ export default function Home() {
         <AboutMe />
         <Experience />
         <SkillsExpertise />
+        <TerminalGame />
         <Contact />
       </main>
     </div>
