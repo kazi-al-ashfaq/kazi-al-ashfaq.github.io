@@ -1,7 +1,6 @@
 "use client";
 import { useRef, useState, useEffect } from "react";
 import emailjs from "emailjs-com";
-import { FaLinkedin, FaGithub } from "react-icons/fa";
 
 export default function Contact() {
   const form = useRef<HTMLFormElement>(null);
