@@ -8,7 +8,7 @@ export default function Preloader() {
   const [typing1, setTyping1] = useState(true);
   const [typing2, setTyping2] = useState(false);
   const name = "Kazi Al Ashfaq";
-  const role = "> Cybersecurity | Educator";
+  const role = "> Cybersecurity Enthusiast | Educator";
 
   useEffect(() => {
     let i = 0;
@@ -55,15 +55,18 @@ export default function Preloader() {
       aria-live="polite"
       aria-label="Loading Kazi Al Ashfaq's portfolio"
     >
-      <div className="flex flex-col items-start mt-32 ml-12 p-6 sm:mt-24 sm:ml-6 sm:p-4" style={{fontFamily: 'Courier New, Courier, monospace', fontSize: 'clamp(1.5rem, 5vw, 2.8rem)'}}>
-        <span className="terminal-line">{line1}<span className="terminal-cursor">{typing1 ? '|' : ''}</span></span>
-        <span className="terminal-line">{line2}<span className="terminal-cursor">{typing2 ? '|' : ''}</span></span>
+      <div className="flex flex-col items-start mt-20 ml-1 p-2 sm:mt-24 sm:ml-6 sm:p-4 w-full max-w-full overflow-x-auto" style={{fontFamily: 'Courier New, Courier, monospace', fontSize: 'clamp(1.05rem, 4vw, 1.3rem)', wordBreak: 'break-word'}}>
+        <span className="terminal-line break-words break-all w-full max-w-full whitespace-pre-line">{line1}<span className="terminal-cursor">{typing1 ? '|' : ''}</span></span>
+        <span className="terminal-line break-words break-all w-full max-w-full whitespace-pre-line">{line2}<span className="terminal-cursor">{typing2 ? '|' : ''}</span></span>
       </div>
       <style>{`
-        .terminal-line { white-space: pre; line-height: 1.2; margin-bottom: 0.5em; letter-spacing: 0.01em; }
+        .terminal-line { white-space: pre-line; line-height: 1.2; margin-bottom: 0.5em; letter-spacing: 0.01em; word-break: break-word; max-width: 100vw; overflow-wrap: break-word; }
         .terminal-cursor { display: inline-block; width: 1ch; color: #00C0E0; animation: blink 1s steps(1) infinite; font-weight: bold; }
         @keyframes blink { 0%, 50% { opacity: 1; } 51%, 100% { opacity: 0; } }
-        @media (max-width: 600px) { .terminal-line { font-size: clamp(1.1rem, 7vw, 2.2rem); } }
+        @media (max-width: 600px) {
+          .terminal-line { font-size: clamp(0.9rem, 5vw, 1.05rem); max-width: 100vw; }
+          .terminal-line, .terminal-cursor { word-break: break-word; }
+        }
         @media (prefers-reduced-motion: reduce) { .terminal-cursor { animation: none !important; } }
       `}</style>
     </div>

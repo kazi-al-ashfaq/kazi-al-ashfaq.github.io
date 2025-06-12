@@ -25,7 +25,7 @@ const COMMANDS = {
   ],
   "sudo hire kazi": [
     "Access granted. Download my resume:",
-    '<a href="/Kazi_Al_Ashfaq_Resume.docx" class="underline text-dgrees-primary" download>Download Resume</a>'
+    '<a href="/Kazi_Al_Ashfaq_Resume.pdf" class="underline text-dgrees-primary" download>Download Resume (PDF)</a>'
   ],
   help: [
     "Available commands:",
@@ -46,16 +46,19 @@ function getRandomError() {
 }
 
 export default function TerminalGame() {
-  const [history, setHistory] = useState<{ cmd: string; out: string[] }[]>(() => {
-    if (typeof window !== "undefined") {
-      return JSON.parse(localStorage.getItem("cyber_terminal_history") || "[]");
-    }
-    return [];
-  });
+  const [history, setHistory] = useState<{ cmd: string; out: string[] }[]>([]);
   const [input, setInput] = useState("");
   const [isFocusing, setIsFocusing] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const logRef = useRef<HTMLDivElement>(null);
+
+  // Load history from localStorage on client only
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const stored = localStorage.getItem("cyber_terminal_history");
+      if (stored) setHistory(JSON.parse(stored));
+    }
+  }, []);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -127,21 +130,20 @@ export default function TerminalGame() {
         ))}
       </div>
       <form onSubmit={handleSubmit} className="flex items-center gap-2 mt-2">
-        <span className="text-dgrees-primary text-lg">&gt;</span>
+        <span className="text-dgrees-primary text-lg flex items-center">&gt;{!isFocusing && input.length === 0 && <span className="animate-blink ml-1">█</span>}</span>
         <input
           ref={inputRef}
           type="text"
           value={input}
           onChange={(e: ChangeEvent<HTMLInputElement>) => setInput(e.target.value)}
           className="flex-1 bg-transparent border-none outline-none text-[#00C0E0] placeholder-dgrees-muted text-base md:text-lg animate-cursor"
-          style={{ fontFamily: 'Courier New, monospace' }}
+          style={{ fontFamily: 'Courier New, monospace', caretColor: '#00C0E0' }}
           autoComplete="off"
           spellCheck={false}
           aria-label="Terminal command input"
           onFocus={() => setIsFocusing(true)}
           onBlur={() => setIsFocusing(false)}
         />
-        <span className="animate-blink text-dgrees-primary">█</span>
       </form>
       <style>{`
         .animate-blink {

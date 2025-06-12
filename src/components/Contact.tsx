@@ -1,5 +1,5 @@
 "use client";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import emailjs from "emailjs-com";
 import { FaLinkedin, FaGithub } from "react-icons/fa";
 
@@ -8,6 +8,7 @@ export default function Contact() {
   const [sent, setSent] = useState(false);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [year, setYear] = useState<number | null>(null);
 
   // Simple sanitization for user input
   function sanitize(input: string) {
@@ -47,6 +48,10 @@ export default function Contact() {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    setYear(new Date().getFullYear());
+  }, []);
 
   return (
     <section
@@ -106,28 +111,26 @@ export default function Contact() {
         {sent && <p className="text-green-500 font-medium text-center">Message sent successfully!</p>}
         {error && <p className="text-red-500 font-medium text-center">Failed to send message. Please try again.</p>}
       </form>
-      <div className="flex gap-8 mt-8 justify-center items-center">
-        <a
-          href="https://linkedin.com/in/your-linkedin"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="LinkedIn"
-          className="text-3xl text-dgrees-secondary hover:text-dgrees-primary transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-dgrees-secondary rounded-full"
-        >
-          <FaLinkedin />
-        </a>
-        <a
-          href="https://github.com/your-github"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="GitHub"
-          className="text-3xl text-dgrees-muted hover:text-dgrees-primary transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-dgrees-secondary rounded-full"
-        >
-          <FaGithub />
-        </a>
+      {/* Email Me Directly Block */}
+      <div className="flex justify-center mt-10">
+        <div className="bg-dgrees-bg border border-dgrees-muted rounded-xl shadow-md px-6 py-5 w-full max-w-md text-center">
+          <h3 className="text-xl font-semibold mb-2 text-dgrees-primary">Email Me Directly</h3>
+          <p className="text-dgrees-muted mb-2">Prefer email? You can also reach me at</p>
+          <a
+            href="mailto:kazialashfaq@gmail.com"
+            className="text-dgrees-primary underline hover:text-dgrees-secondary transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-dgrees-primary font-mono text-base md:text-lg font-medium"
+            aria-label="Email kazialashfaq@gmail.com"
+          >
+            kazialashfaq@gmail.com
+          </a>
+          <div className="mt-2 text-xs text-dgrees-muted select-all">
+            kazialashfaq [at] gmail [dot] com
+          </div>
+        </div>
       </div>
+      {/* End Email Me Directly Block */}
       <footer className="mt-10 text-center text-xs text-dgrees-muted tracking-wide select-none">
-        &copy; {new Date().getFullYear()} Kazi Al Ashfaq
+        &copy; {year ?? ''} Kazi Al Ashfaq
       </footer>
     </section>
   );

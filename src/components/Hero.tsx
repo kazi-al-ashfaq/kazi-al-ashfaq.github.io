@@ -39,11 +39,11 @@ export default function Hero() {
       className="min-h-screen flex flex-col justify-center items-center bg-dgrees-bg text-dgrees-text px-2"
       aria-labelledby="hero-heading"
     >
-      <div className="w-full max-w-2xl flex flex-col items-center">
-        <h1 id="hero-heading" className="text-3xl sm:text-4xl font-bold text-dgrees-text text-center leading-tight">
-          Kazi Al Ashfaq <span className="block text-lg font-medium text-dgrees-secondary mt-1">Cybersecurity Enthusiast & Educator</span>
+      <div className="w-full max-w-2xl flex flex-col items-center px-2 sm:px-0">
+        <h1 id="hero-heading" className="text-3xl sm:text-4xl font-bold text-dgrees-text text-center leading-tight break-words w-full">
+          Kazi Al Ashfaq
         </h1>
-        <p className="mt-1 text-lg text-dgrees-muted min-h-[2.2rem] flex items-center justify-center w-full max-w-full overflow-hidden">
+        <p className="mt-1 text-lg text-dgrees-muted min-h-[2.2rem] flex items-center justify-center w-full max-w-full overflow-x-auto sm:overflow-x-visible whitespace-pre-line break-words">
           <AnimatePresence mode="wait">
             <motion.span
               key={index}
@@ -51,7 +51,7 @@ export default function Hero() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.4 }}
-              className="font-mono whitespace-nowrap block w-full text-center"
+              className="font-mono block w-full text-center break-words"
             >
               {displayed}
               <span className="border-r-2 border-dgrees-primary animate-pulse ml-1" />
@@ -59,10 +59,10 @@ export default function Hero() {
           </AnimatePresence>
         </p>
         <div className="mt-3 flex flex-col sm:flex-row gap-2 w-full max-w-xs sm:max-w-none justify-center">
-          <a href="#contact" className="px-4 py-1.5 rounded bg-dgrees-primary text-dgrees-bg font-semibold hover:bg-dgrees-secondary hover:text-dgrees-text transition text-center text-base">
+          <a href="#contact" className="px-4 py-1.5 rounded bg-dgrees-primary text-dgrees-bg font-semibold hover:bg-dgrees-secondary hover:text-dgrees-text transition text-center text-base w-full sm:w-auto">
             Let’s Work Together
           </a>
-          <a href="/Kazi_Al_Ashfaq_Resume.docx" className="px-4 py-1.5 rounded border-2 border-dgrees-primary text-dgrees-primary font-semibold hover:bg-dgrees-primary hover:text-dgrees-bg transition text-center text-base" download>
+          <a href="/Kazi_Al_Ashfaq_Resume.pdf" className="px-4 py-1.5 rounded border-2 border-dgrees-primary text-dgrees-primary font-semibold hover:bg-dgrees-primary hover:text-dgrees-bg transition text-center text-base w-full sm:w-auto" download>
             Download Resume
           </a>
         </div>
